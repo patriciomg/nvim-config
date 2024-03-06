@@ -36,7 +36,6 @@ return {
           "markdown_inline",
           "php",
           "python",
-          "pip-requirements",
           "sql",
           "ssh_config",
           "twig",
