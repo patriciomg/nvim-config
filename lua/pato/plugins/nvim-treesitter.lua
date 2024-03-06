@@ -23,7 +23,7 @@ return {
           enable = true,
         },
         -- ensure these language parsers are installed
-        -- in josean list:  svelte,prisma
+        -- in original josean's list:  svelte,prisma
         ensure_installed = {
           "json",
           "javascript",
