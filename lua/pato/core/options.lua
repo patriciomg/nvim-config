@@ -1,4 +1,20 @@
+-- to change leader key for vim
+-- vim .g.map.leader = " "
+
+vim.scriptencoding = "utf-8"
+
 local opt = vim.opt -- for conciseness
+
+opt.encoding = "utf-8"
+opt.fileencoding = "utf-8"
+
+opt.mouse = "a"
+
+opt.title = true
+
+-- backup
+opt.backup = false
+opt.backupskip = { "/tmp/*", "/private/tmp/*" }
 
 -- line numbers
 opt.relativenumber = true -- show relative line numbers
@@ -40,3 +56,16 @@ opt.splitbelow = true -- split horizontal window to the bottom
 
 -- turn off swapfile
 opt.swapfile = false
+
+opt.wildignore:append({
+  "*/node_modules/*",
+  "*/__pycache__/*",
+  "*/cache/*",
+  "*/venv/*",
+  "*.jpg",
+  "*.jpeg",
+  "*.png",
+  "*.gif",
+  "*.docx",
+  "*.xlsx",
+})
