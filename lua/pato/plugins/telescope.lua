@@ -20,6 +20,25 @@ return {
             ["<C-q>"] = actions.send_selected_to_qflist + actions.open_qflist,
           },
         },
+        pickers = {
+          find_files = {
+            -- hidden = true,
+            find_command = {
+              "rg",
+              "--files",
+              "--hidden",
+              "--glob",
+              "!{**/.git/*,**/node_modules/*,**/package-lock.json,**/yarn.lock}",
+              "-L",
+            },
+          },
+          grep_string = {
+            additional_args = { "--hidden" },
+          },
+          live_grep = {
+            additional_args = { "--hidden" },
+          },
+        },
       },
     })
 
