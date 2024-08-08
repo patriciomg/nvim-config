@@ -21,8 +21,9 @@ opt.relativenumber = true -- show relative line numbers
 opt.number = true -- shows absolute line number on cursor line (when relative number is on)
 
 -- tabs & indentation
-opt.tabstop = 4 -- 2 spaces for tabs (prettier default)
-opt.shiftwidth = 4 -- 2 spaces for indent width
+opt.tabstop = 4 -- 4 spaces for tabs (prettier default)
+opt.shiftwidth = 4 -- 4 spaces for indent width
+opt.softtabstop = 4 -- 4 spaces for tabs
 opt.expandtab = true -- expand tab to spaces
 opt.autoindent = true -- copy indent from current line when starting new one
 
@@ -69,3 +70,36 @@ opt.wildignore:append({
   "*.docx",
   "*.xlsx",
 })
+
+opt.swapfile = false -- do not use a swap file for the buffer
+opt.backup = false -- do not keep a backup file
+opt.undodir = os.getenv("HOME") .. "/.vim/undodir" -- set directory where undo files are stored
+opt.undofile = true -- save undo history to a file
+
+
+vim.api.nvim_create_autocmd({"BufNewFile", "BufRead"}, {
+  pattern = "*.py",
+  callback = function()
+    vim.opt.textwidth = 79
+    vim.opt.colorcolumn = "79"
+  end
+}) -- python formatting
+
+vim.api.nvim_create_autocmd({"BufNewFile", "BufRead"}, {
+  pattern = {"*.js", "*.html", "*.css", "*.lua"},
+  callback = function()
+    vim.opt.tabstop = 2
+    vim.opt.softtabstop = 2
+    vim.opt.shiftwidth = 2
+  end
+}) -- javascript formatting
+
+
+local CleanOnSave = vim.api.nvim_create_augroup('CleanOnSave', {})
+vim.api.nvim_create_autocmd({"BufWritePre"}, {
+  group = CleanOnSave,
+  pattern = "*",
+  command = [[%s/\s\+$//e]],
+}) -- remove trailing whitespace from all lines before saving a file)
+
+

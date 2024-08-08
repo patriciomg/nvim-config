@@ -15,6 +15,23 @@ return {
     local keymap = vim.keymap -- for conciseness
 
     local opts = { noremap = true, silent = true }
+
+    local function get_python_path(workspace)
+      -- Use activated virtualenv
+      if vim.env.VIRTUAL_ENV then
+        return vim.env.VIRTUAL_ENV .. "/bin/python"
+      end
+      -- Find and use virtualenv in workspace directory
+      for _, pattern in ipairs({ "*", ".*" }) do
+        local match = vim.fn.glob(vim.fn.join({ workspace, pattern, "bin", "python" }, "/"))
+        if match ~= "" then
+          return match
+        end
+      end
+      -- Fallback to system Python
+      return vim.fn.exepath("python3") or vim.fn.exepath("python") or "python"
+    end
+
     local on_attach = function(client, bufnr)
       opts.buffer = bufnr
 
@@ -138,8 +155,23 @@ return {
 
     -- configure python server
     lspconfig["pyright"].setup({
-      capabilities = capabilities,
-      on_attach = on_attach,
+      -- capabilities = capabilities,
+      -- on_attach = on_attach,
+      --
+      on_attach = function(client, bufnr)
+        -- Your custom on_attach function here
+      end,
+      settings = {
+        python = {
+          analysis = {
+            autoSearchPaths = true,
+            useLibraryCodeForTypes = true,
+          },
+        },
+      },
+      before_init = function(params)
+        params.settings.python.pythonPath = get_python_path(params.rootPath)
+      end,
     })
 
     -- configure lua server (with special settings)
