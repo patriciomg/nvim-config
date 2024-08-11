@@ -44,7 +44,7 @@ return {
           "bash",
           "lua",
           "vim",
-          "dockerfile",
+          -- "dockerfile",
           "gitignore",
           "query",
         },

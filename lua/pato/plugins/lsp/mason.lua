@@ -3,6 +3,7 @@ return {
   dependencies = {
     "williamboman/mason-lspconfig.nvim",
     "WhoIsSethDaniel/mason-tool-installer.nvim",
+    -- "neovim/nvim-lspconfig", -- added from https://www.youtube.com/watch?v=lpQMeFph1RE
   },
   config = function()
     -- import mason
@@ -27,6 +28,7 @@ return {
     mason_lspconfig.setup({
       -- list of servers for mason to install
       ensure_installed = {
+        -- "sumneko_lua",
         "tsserver",
         "html",
         "cssls",

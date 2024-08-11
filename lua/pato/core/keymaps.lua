@@ -32,7 +32,7 @@ keymap.set("n", "<leader>tp", "<cmd>tabp<CR>", { desc = "Go to previous tab" }) 
 keymap.set("n", "<leader>tf", "<cmd>tabnew %<CR>", { desc = "Open current buffer in new tab" }) --  move current buffer to new tab
 
 -- comment
-keymap.set({"n", "v"}, "<leader>#", ":CommentToggle<CR>")
+keymap.set({ "n", "v" }, "<leader>#", ":CommentToggle<CR>")
 
 -- pyright ignore line
 keymap.set("n", "<leader>ig", "A # pyright: ignore<Esc>")
@@ -40,11 +40,11 @@ keymap.set("n", "<leader>ig", "A # pyright: ignore<Esc>")
 -- Paste in visual mode without yanking replaced text
 vim.keymap.set("x", "p", [["_dP]])
 -- yank to clipboard
-vim.keymap.set({"n", "v"}, "<leader>y", [["+y]])
+vim.keymap.set({ "n", "v" }, "<leader>y", [["+y]])
 -- yank line to clipboard
 vim.keymap.set("n", "<leader>Y", [["+Y]])
 -- delete without yanking
-vim.keymap.set({"n", "v"}, "<leader>d", [["_d]])
+vim.keymap.set({ "n", "v" }, "<leader>d", [["_d]])
 
 -- move a blocks of text up/down with K/J in visual mode
 vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv", { silent = true })
@@ -64,4 +64,7 @@ vim.keymap.set("i", "<C-k>", "<Esc>:m .-2<CR>==gi", { desc = "move line down" })
 vim.keymap.set("v", "<C-j>", ":m '>+1<CR>gv=gv", { desc = "move line up" })
 vim.keymap.set("v", "<C-k>", ":m '<-2<CR>gv=gv", { desc = "move line down" })
 
-keymap.set({"n", "v"}, "<leader>#", ":CommentToggle<CR>", { desc = "Toggle comment" })
+keymap.set({ "n", "v" }, "<leader>#", ":CommentToggle<CR>", { desc = "Toggle comment" })
+
+-- to rename variables and all references in current code
+vim.keymap.set("n", "<leader>rn", ":IncRename ", { desc = "Rename variables" })
